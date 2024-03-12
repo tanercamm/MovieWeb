@@ -44,6 +44,11 @@ namespace MovieWeb.Controllers
 				foreach (var id in model.GenreIds)
 				{
 					entity.Genres.Add(_context.Genres.FirstOrDefault(i => i.GenreId == id));
+					//var genre = _context.Genres.FirstOrDefault(i => i.GenreId == id);
+					//if (genre != null)
+					//{
+					//	entity.Genres.Add(genre);
+					//}
 				}
 
 				_context.Movies.Add(entity);
@@ -117,6 +122,10 @@ namespace MovieWeb.Controllers
 					{
 						await file.CopyToAsync(stream);
 					}
+				}
+				else // yeni dosya yüklenmemişse, mevcut resmi tanımlarız
+				{
+					entity.ImageUrl = entity.ImageUrl; 
 				}
 
 				// türlerin güncellemesini sağlıyoruz
