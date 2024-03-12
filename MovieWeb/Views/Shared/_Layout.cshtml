@@ -10,32 +10,45 @@
 	<link rel="stylesheet" href="~/MovieWeb.styles.css" asp-append-version="true" />
 </head>
 <body>
+	@RenderSection("message", false)
 	<header>
 		@await Html.PartialAsync("_navbar")
+		@*-- Jumbotron alanı --*@
+		@RenderSection("header", false)
 	</header>
-	@*-- Jumbotron alanı --*@
-	<div class="bg-light p-5" style="background-image: url(/img/background.jpg); background-size: 100% 270%; background-position: top;">
-		<div class="container">
-			<h1 class="display-4 text-white">🎬 Hoş Geldiniz! 🍿</h1>
-			<p class="lead text-white">
-				MovieWeb, film tutkunları için bir bilgi hazinesidir! 🎉
-				<br />
-				Siz de bu heyecan verici film yolculuğuna katılın ve her ziyaretinizde yeni şeyler keşfedin.🔍
-				<br />
-				🌟 Keyifli gezintiler! 🍿
-			</p>
-		</div>
-	</div>
 
 	<div class="container mt-3">
-		<main role="main" class="pb-3">
-			@RenderBody()
-		</main>
+
+		@*menu section kullandığımız takdirde sayfa kolonlarını 3e9 böldük ve 9 kolonuna renderbody ekliyoruz*@
+
+		@if (IsSectionDefined("menu"))
+		{
+			<div class="row">
+				<div class="col-md-3">
+					@* @await Html.PartialAsync("_menu") koşulunu kullanmaya gerek kalmadı *@
+					@RenderSection("menu", false)
+				</div>
+				<div class="col-md-9">
+					@RenderBody()
+				</div>
+			</div>
+		}
+		else
+		{
+			@*eğer menu section kullanmıyorsak renderbody sayfanın tamamını almasını sağladık*@
+
+			<div class="row">
+				<div class="col-md-12">
+					@RenderBody()
+				</div>
+			</div>
+		}
+
 	</div>
 
 	<footer class="border-top footer text-muted">
 		<div class="container">
-			&copy; 2024 - MovieWeb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+			&copy; 2024 - MovieWeb
 		</div>
 	</footer>
 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
