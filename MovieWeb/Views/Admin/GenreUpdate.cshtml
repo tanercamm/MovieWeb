@@ -17,12 +17,21 @@
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</div>
 		<div class="col-md-9">
-			@for (int i = 0; i < Model.Movies.Count; i++)
-			{
-				<input type="hidden" name="Movies[@i].MovieId" value="@Model.Movies[i].MovieId" />
-				<input type="hidden" name="Movies[@i].ImageUrl" value="@Model.Movies[i].ImageUrl" />
-				<input type="hidden" name="Movies[@i].Title" value="@Model.Movies[i].Title" />
+			@{
+				var moviesCount = Model.Movies.Count();
 			}
+
+			@for (int i = 0; i < moviesCount; i++)
+			{
+				if (Model.Movies[i] != null)
+				{
+					<input type="hidden" name="Movies[@i].MovieId" value="@Model.Movies[i].MovieId" />
+					<input type="hidden" name="Movies[@i].ImageUrl" value="@Model.Movies[i].ImageUrl" />
+					<input type="hidden" name="Movies[@i].Title" value="@Model.Movies[i].Title" />
+				}
+			}
+			}
+
 			<table class="table table-striped table-hover table-bordered">
 				<thead>
 					<tr>

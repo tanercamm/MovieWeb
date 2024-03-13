@@ -198,6 +198,7 @@ namespace MovieWeb.Controllers
 			return View("GenreList", GetGenres());
 		}
 
+		[HttpGet]
 		public IActionResult GenreUpdate(int? id)
 		{
 			if (id == null)
@@ -235,7 +236,7 @@ namespace MovieWeb.Controllers
 			{
 				var entity = _context.Genres.Include("Movies").FirstOrDefault(i => i.GenreId == model.GenreId);
 
-				if (model == null)
+				if (entity == null)
 				{
 					return NotFound();
 				}
