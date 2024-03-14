@@ -10,13 +10,8 @@
 
 		public string Imdb { get; set; }
 
-		public string HomePage { get; set; }
-
 		public string PlaceOfBirth { get; set; }
 
-		public User User { get; set; }
-
-		public int UserId { get; set; }   // foreign key, unique key (yalnızca bir değer alabilir)
 
 	}
 }
