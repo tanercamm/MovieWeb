@@ -6,6 +6,7 @@
 	<thead>
 		<tr>
 			<th style="width:30px">#</th>
+			<th style="width:100px">ImageUrl</th>
 			<th style="width:100px">Name</th>
 			<th>Biography</th>
 			<th style="width:300px">Imdb</th>
@@ -18,14 +19,15 @@
 		{
 			<tr>
 				<td>@person.PersonId</td>
+				<td> <img src="/persons/@person.ImageUrl" width="80" /></td>
 				<td>@person.Name</td>
 				<td>@person.Biography</td>
-				<td>@person.Imdb</td>
+				<td>→<a href="@person.Imdb" target="_blank" rel="noopener noreferrer"> Imdb/@person.Name</a></td>
 				<td>@person.PlaceOfBirth</td>
 				<td>
 					<a href="/persons/personupdate/@person.PersonId" class="btn btn-primary btn-sm">Update</a>
 					<form action="/persons/persondelete" method="post" style="display: inline">
-						@* <input type="hidden" name="PersonId" value="@person.PersonId" /> *@
+						<input type="hidden" name="PersonId" value="@person.PersonId" />
 						<button type="submit" class="btn btn-danger btn-sm">Delete</button>
 					</form>
 				</td>
