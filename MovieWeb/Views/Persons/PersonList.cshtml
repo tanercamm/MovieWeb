@@ -1,4 +1,4 @@
-﻿@model PeopleViewModel
+﻿@model PersonsViewModel
 
 <h1>Person List</h1>
 
@@ -14,7 +14,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach (var person in Model.People)
+		@foreach (var person in Model.Persons)
 		{
 			<tr>
 				<td>@person.PersonId</td>
@@ -23,8 +23,8 @@
 				<td>@person.Imdb</td>
 				<td>@person.PlaceOfBirth</td>
 				<td>
-					<a href="/people/personupdate/@person.PersonId" class="btn btn-primary btn-sm">Update</a>
-					<form action="/people/persondelete" method="post" style="display: inline">
+					<a href="/persons/personupdate/@person.PersonId" class="btn btn-primary btn-sm">Update</a>
+					<form action="/persons/persondelete" method="post" style="display: inline">
 						@* <input type="hidden" name="PersonId" value="@person.PersonId" /> *@
 						<button type="submit" class="btn btn-danger btn-sm">Delete</button>
 					</form>

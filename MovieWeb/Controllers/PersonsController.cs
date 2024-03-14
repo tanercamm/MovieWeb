@@ -4,11 +4,11 @@ using MovieWeb.Entity;
 
 namespace MovieWeb.Controllers
 {
-	public class PeopleController : Controller
+	public class PersonsController : Controller
 	{
 		private readonly MovieContext _context;
 
-		public PeopleController(MovieContext context)
+		public PersonsController(MovieContext context)
 		{
 			_context = context;
 		}
@@ -27,13 +27,13 @@ namespace MovieWeb.Controllers
 		[HttpPost]
 		public IActionResult PersonCreate(Person model)
 		{
-			_context.People.Add(model);
+			_context.Persons.Add(model);
 			return RedirectToAction("PersonList","People");
 		}
 
 		public IActionResult PersonList()
 		{
-			var people = _context.People.ToList();
+			var people = _context.Persons.ToList();
 			return View(people);
 		}
 

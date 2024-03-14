@@ -3,9 +3,9 @@ using MovieWeb.Entity;
 
 namespace MovieWeb.Models
 {
-	public class PeopleViewModel
+	public class PersonsViewModel
 	{
-		public List<Person> People { get; set; }
+		public List<Person> Persons { get; set; }
 
 	}
 
