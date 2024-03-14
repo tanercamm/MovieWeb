@@ -10,9 +10,59 @@
 }
 
 <h1>Film Listesi</h1>
+<hr />
+@*PAGINATION*@
+<nav aria-label="Page navigation example">
+	<ul class="pagination" id="pagination">
+		@for (var i = 1; i <= Model.PageInfo.TotalPages; i++)
+		{
+			<li class="page-item" aria-current="page"><a class="page-link" href="/?page=@i" onclick="changePage(@i)">@i</a></li>
+		}
+	</ul>
+</nav>
+
 <div id="filmler">
 	@foreach (var movie in Model.PopularMovies)
 	{
 		@await Html.PartialAsync("_movie", movie)
 	}
 </div>
+
+@*PAGINATION*@
+<nav aria-label="Page navigation example">
+	<ul class="pagination" id="pagination">
+		@for (var i = 1; i <= Model.PageInfo.TotalPages; i++)
+		{
+			<li class="page-item" aria-current="page"><a class="page-link" href="/?page=@i" onclick="changePage(@i)">@i</a></li>
+		}
+	</ul>
+</nav>
+
+<script>
+	function changePage(pageNumber) {
+		// Tıklanan sayfa düğmesini aktif hale getir
+		var activeButton = document.querySelector('.pagination .page-item:nth-child(' + pageNumber + ')');
+		activeButton.classList.add('active');
+
+		// Aktif olan tüm sayfa düğmelerini pasif hale getir
+		var pageButtons = document.querySelectorAll('.pagination .page-item');
+		pageButtons.forEach(function (button) {
+			button.classList.remove('active');
+		});
+
+		// Tıklanan düğmenin arka plan rengini değiştir
+		activeButton.style.backgroundColor = 'darkgray';
+	}
+</script>
+
+
+@* <nav aria-label="Page navigation example">
+	<ul class="pagination">
+		@for (var i = 1; i <= Model.PageInfo.TotalPages; i++)
+		{
+
+			<li class="page-item active" aria-current="page"><a class="page-link" href="/?page=@i">@i</a></li>
+
+		}
+	</ul>
+</nav> *@

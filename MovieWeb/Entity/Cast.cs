@@ -1,7 +1,8 @@
 ﻿namespace MovieWeb.Entity
-{
+{	// oyuncu
 	public class Cast
 	{
+
 		public int CastId { get; set; }
 
 		public Movie Movie { get; set; }

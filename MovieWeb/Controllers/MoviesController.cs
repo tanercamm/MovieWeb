@@ -14,7 +14,9 @@ namespace MovieWeb.Controllers
 			_context = context;
 		}
 
-		public IActionResult List(int? id, string q)
+		public int pageSize = 10;
+
+		public IActionResult List(int? id, string q, int page = 1)
 		{
 			//IEnumerable belleğe atıp, ardından sorgular
 			//IQueryable direkt olarak server üzerinden sorgular (hız avantajı)
@@ -36,7 +38,12 @@ namespace MovieWeb.Controllers
 
 			var model = new MoviesViewModel()
 			{
-				Movies = movies.ToList()
+				Movies = movies.Skip((page - 1) * pageSize).Take(pageSize).ToList(),
+				PageInfo = new PageInfo
+				{
+					ItemsPerPage = pageSize,
+					TotalItems = _context.Movies.Count()
+				}
 			};
 
 			return View("Movies", model);

@@ -1,5 +1,5 @@
 ﻿namespace MovieWeb.Entity
-{
+{	// ekip
 	public class Crew
 	{
 

@@ -5,28 +5,35 @@ using MovieWeb.Models;
 
 namespace MovieWeb.Controllers
 {
-	public class HomeController : Controller
-	{
-		private readonly MovieContext _context;
+    public class HomeController : Controller
+    {
+        private readonly MovieContext _context;
 
-		public HomeController(MovieContext context)
-		{
-			_context = context;
-		}
+        public HomeController(MovieContext context)
+        {
+            _context = context;
+        }
 
-		public IActionResult Index()
-		{
-			var model = new HomePageViewModel
-			{
-				PopularMovies = _context.Movies.ToList()
-			};
-			return View(model);
-		}
+        public int pageSize = 10;
 
-		public IActionResult About()
-		{
-			return View();
-		}
+        public IActionResult Index(int page = 1)
+        {
+            var model = new HomePageViewModel
+            {
+                PopularMovies = _context.Movies.Skip((page - 1) * pageSize).Take(pageSize).ToList(),
+                PageInfo = new PageInfo()
+                {
+                    ItemsPerPage = pageSize,
+                    TotalItems = _context.Movies.Count()
+                }
+            };
+            return View(model);
+        }
 
-	}
+        public IActionResult About()
+        {
+            return View();
+        }
+
+    }
 }
