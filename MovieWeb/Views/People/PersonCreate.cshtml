@@ -1,0 +1,40 @@
+﻿@model PersonCreateViewModel
+
+<h1>Create Person</h1>
+<hr />
+
+<form method="post" asp-controller="People" asp-action="PersonCreate">
+	<div class="row">
+		<div class="col-md-8">
+			<div asp-validation-summary="All"></div> @*Tüm validation hatalarını gösterir*@
+			<div class="mb-3">
+				<label asp-for="Name"></label>
+				<input asp-for="Name" class="form-control" />
+				<span asp-validation-for="Name" class="text-danger"></span>@*ilgili validation hatasını gösterir*@
+			</div>
+
+			<div class="mb-3">
+				<label asp-for="Biography"></label>
+				<textarea asp-for="Biography" class="form-control"></textarea>
+				<span asp-validation-for="Biography" class="text-danger"></span>
+			</div>
+
+			<div class="mb-3">
+				<label asp-for="Imdb"></label>
+				<textarea asp-for="Imdb" class="form-control"></textarea>
+				<span asp-validation-for="Imdb" class="text-danger"></span>
+			</div>
+
+			<div class="mb-3">
+				<label asp-for="PlaceOfBirth"></label>
+				<textarea asp-for="PlaceOfBirth" class="form-control"></textarea>
+				<span asp-validation-for="PlaceOfBirth" class="text-danger"></span>
+			</div>
+
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</div>
+		<div class="col-md-4">
+			hello person
+		</div>
+	</div>
+</form>
