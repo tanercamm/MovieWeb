@@ -61,5 +61,10 @@ namespace MovieWeb.Models
 		public List<Person> Directors { get; set; }
 	}
 
+	public class CastListViewModel
+	{
+		public List<Person> Casts { get; set; }
+	}
+
 }
 

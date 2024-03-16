@@ -103,6 +103,16 @@ namespace MovieWeb.Controllers
 			return View(viewModel);
 		}
 
+		public IActionResult CastList()
+		{
+			var castList = _context.Persons.Where(c => c.isDirector == false).ToList();
+			var viewModel = new CastListViewModel
+			{
+				Casts = castList
+			};
+			return View(viewModel);
+		}
+
 		[HttpPost]
 		public IActionResult PersonDelete(int personId)
 		{
@@ -149,7 +159,7 @@ namespace MovieWeb.Controllers
 			{
 				var entity = _context.Persons.FirstOrDefault(g => g.PersonId == model.PersonId);
 
-				if(entity == null)
+				if (entity == null)
 				{
 					return NotFound();
 				}
