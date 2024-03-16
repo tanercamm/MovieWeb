@@ -39,6 +39,13 @@
 				<span asp-validation-for="PlaceOfBirth" class="text-danger"></span>
 			</div>
 
+			<div class="mb-3">
+				<label asp-for="isDirector"></label><br />
+				<input type="radio" asp-for="isDirector" value="true" /> Director
+				<input type="radio" asp-for="isDirector" value="false" /> Cast
+				<span asp-validation-for="isDirector" class="text-danger"></span>
+			</div>
+
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</div>
 		<div class="col-md-4">

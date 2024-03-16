@@ -48,12 +48,57 @@ namespace MovieWeb.Controllers
 		}
 
 
-		public IActionResult PersonList()
+		//public IActionResult PersonList()
+		//{
+		//	var people = _context.Persons.ToList();
+		//	var viewModel = new PersonsViewModel
+		//	{
+		//		Persons = people
+		//	};
+		//	return View(viewModel);
+		//}
+
+		public IActionResult PersonList(bool? isDirector)
 		{
 			var people = _context.Persons.ToList();
-			var viewModel = new PersonsViewModel
+			if (isDirector.HasValue)
 			{
-				Persons = people
+				if (isDirector == true)
+				{
+					var viewModel = new PersonsViewModel
+					{
+						Persons = people,
+						isDirector = true
+					};
+					return View(viewModel);
+				}
+				else
+				{
+					var filteredPeople = people.Where(p => p.isDirector == false).ToList();
+					var viewModel = new PersonsViewModel
+					{
+						Persons = filteredPeople,
+						isDirector = false
+					};
+					return View(viewModel);
+				}
+			}
+			else
+			{
+				var viewModel = new PersonsViewModel
+				{
+					Persons = people
+				};
+				return View(viewModel);
+			}
+		}
+
+		public IActionResult DirectorList()
+		{
+			var directorList = _context.Persons.Where(p => p.isDirector == true).ToList();
+			var viewModel = new DirectorListViewModel
+			{
+				Directors = directorList
 			};
 			return View(viewModel);
 		}
@@ -86,7 +131,8 @@ namespace MovieWeb.Controllers
 				Biography = p.Biography,
 				Imdb = p.Imdb,
 				ImageUrl = p.ImageUrl,
-				PlaceOfBirth = p.PlaceOfBirth
+				PlaceOfBirth = p.PlaceOfBirth,
+				isDirector = p.isDirector
 			}).FirstOrDefault(p => p.PersonId == id);
 
 			if (entity == null)
@@ -112,6 +158,7 @@ namespace MovieWeb.Controllers
 				entity.Biography = model.Biography;
 				entity.Imdb = model.Imdb;
 				entity.PlaceOfBirth = model.PlaceOfBirth;
+				entity.isDirector = model.isDirector;
 
 				if (file != null)
 				{

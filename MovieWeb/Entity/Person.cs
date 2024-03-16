@@ -17,5 +17,7 @@ namespace MovieWeb.Entity
 
 		public string PlaceOfBirth { get; set; }
 
-	}
+        public bool isDirector { get; set; }
+
+    }
 }

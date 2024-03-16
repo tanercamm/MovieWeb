@@ -154,6 +154,9 @@ namespace MovieWeb.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("isDirector")
+                        .HasColumnType("bit");
+
                     b.HasKey("PersonId");
 
                     b.ToTable("Persons");

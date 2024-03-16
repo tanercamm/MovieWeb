@@ -1,0 +1,28 @@
+﻿@model DirectorListViewModel
+
+<table class="table table-striped table-hover table-bordered">
+	<thead>
+		<tr>
+			<th style="width:30px">#</th>
+			<th style="width:100px">ImageUrl</th>
+			<th style="width:300px">Name</th>
+			<th style="width:300px">Imdb</th>
+			<th style="width:70px">PlaceOfBirth</th>
+			<th style="width:100px">Biography</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var director in Model.Directors)
+		{
+			<tr>
+				<td>@director.PersonId</td>
+				<td> <img src="/persons/@director.ImageUrl" width="80" /></td>
+				<td>@director.Name</td>
+				<td>→<a href="@director.Imdb" target="_blank" rel="noopener noreferrer"> Imdb/@director.Name</a></td>
+				<td>@director.PlaceOfBirth</td>
+				<td><a href="/persons/details/@director.PersonId" class="btn btn-dark">Details</a></td>
+			</tr>
+		}
+	</tbody>
+
+</table>

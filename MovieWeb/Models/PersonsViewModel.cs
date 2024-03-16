@@ -6,7 +6,7 @@ namespace MovieWeb.Models
 	public class PersonsViewModel
 	{
 		public List<Person> Persons { get; set; }
-
+		public bool isDirector { get; set; }
 	}
 
 	public class PersonCreateViewModel
@@ -31,9 +31,9 @@ namespace MovieWeb.Models
 
 	public class PersonEditViewModel
 	{
-        public int PersonId { get; set; }
+		public int PersonId { get; set; }
 
-        [Required]
+		[Required]
 		[StringLength(50, MinimumLength = 6, ErrorMessage = "İsim için 6-50 karakter aralığında girmelisiniz!")]
 		public string Name { get; set; }
 
@@ -45,14 +45,21 @@ namespace MovieWeb.Models
 		[DataType(DataType.Url)]
 		public string Imdb { get; set; }
 
-        public string ImageUrl { get; set; }
+		public string ImageUrl { get; set; }
 
-        [Display(Name = "City ​​of Birth")]
+		[Display(Name = "City ​​of Birth")]
 		[Required]
 		[StringLength(25, MinimumLength = 2, ErrorMessage = "Doğum yeri için 2-25 karakter aralığında girmelisiniz!")]
 		public string PlaceOfBirth { get; set; }
+
+		[Display(Name = "Job")]
+		public bool isDirector { get; set; }
 	}
 
+	public class DirectorListViewModel
+	{
+		public List<Person> Directors { get; set; }
+	}
 
 }
 

@@ -1,6 +1,24 @@
 ﻿@model PersonsViewModel
 
 <h1>Person List</h1>
+<hr />
+
+@* <form method="get" action="/persons/personlist">
+	<button type="submit" name="isDirector" value="true" class="btn btn-primary @(Model.isDirector ? "active" : "")">Directors</button>
+	<button type="submit" name="isDirector" value="false" class="btn btn-primary @(!Model.isDirector ? "active" : "")">Casts</button>
+</form> *@
+@* <form method="get" action="/persons/personlist">
+	<button type="submit" name="isDirector" value="true" class="btn btn-primary @(Model.isDirector ? "active" : "")">Directors</button>
+	<button type="submit" name="isDirector" value="false" class="btn btn-primary @(Model.isDirector == false ? "active" : "")">Casts</button>
+</form> *@
+<form method="get" action="/persons/personlist">
+	<button type="submit" name="isDirector" value="true" class="btn btn-dark @(Model.isDirector ? "active" : "")">All</button>
+	<button type="submit" name="isDirector" value="false" class="btn btn-secondary @(Model.isDirector == false ? "active" : "")">Casts</button>
+</form>
+
+
+
+<br />
 
 <table class="table table-striped table-hover table-bordered">
 	<thead>
@@ -35,4 +53,6 @@
 		}
 	</tbody>
 </table>
+
+
 
