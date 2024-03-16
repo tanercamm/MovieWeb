@@ -18,10 +18,6 @@ namespace MovieWeb.Data
 
 		public DbSet<Person> Persons { get; set; }
 
-		public DbSet<Crew> Crews { get; set; }
-
-		public DbSet<Cast> Casts { get; set; }
-
 		// entity'lerin özellik tanımlamasını burada işleyebiliriz 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
