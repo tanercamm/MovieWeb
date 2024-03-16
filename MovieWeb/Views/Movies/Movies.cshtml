@@ -2,24 +2,37 @@
 
 <h1>Film Listesi</h1>
 <hr />
-@*PAGINATION*@
-<nav aria-label="Page navigation example">
-	<ul class="pagination" id="pagination">
-		@for (var i = 1; i <= Model.PageInfo.TotalPages; i++)
-		{
-			<li class="page-item" aria-current="page"><a class="page-link" href="/movies/list/?page=@i" onclick="changePage(@i)">@i</a></li>
-		}
-	</ul>
-</nav>
+
 
 <div id="filmler">
 
 	@if (Model.Movies.Count() > 0) // film var ise
 	{
+		@*PAGINATION*@
+		<nav aria-label="Page navigation example">
+			<ul class="pagination" id="pagination">
+				@for (var i = 1; i <= Model.PageInfo.TotalPages; i++)
+				{
+					<li class="page-item" aria-current="page"><a class="page-link" href="/movies/list/?page=@i" onclick="changePage(@i)">@i</a></li>
+				}
+			</ul>
+		</nav>
+
 		@foreach (var movie in Model.Movies)
 		{
 			@await Html.PartialAsync("_movie", movie)
+
 		}
+
+		@*PAGINATION*@
+		<nav aria-label="Page navigation example">
+			<ul class="pagination" id="pagination">
+				@for (var i = 1; i <= Model.PageInfo.TotalPages; i++)
+				{
+					<li class="page-item" aria-current="page"><a class="page-link" href="/movies/list/?page=@i" onclick="changePage(@i)">@i</a></li>
+				}
+			</ul>
+		</nav>
 	}
 	else
 	{
@@ -30,15 +43,7 @@
 
 </div>
 
-@*PAGINATION*@
-<nav aria-label="Page navigation example">
-	<ul class="pagination" id="pagination">
-		@for (var i = 1; i <= Model.PageInfo.TotalPages; i++)
-		{
-			<li class="page-item" aria-current="page"><a class="page-link" href="/movies/list/?page=@i" onclick="changePage(@i)">@i</a></li>
-		}
-	</ul>
-</nav>
+
 
 
 @if (TempData["Message"] != null)
