@@ -48,16 +48,7 @@ namespace MovieWeb.Controllers
 		}
 
 
-		//public IActionResult PersonList()
-		//{
-		//	var people = _context.Persons.ToList();
-		//	var viewModel = new PersonsViewModel
-		//	{
-		//		Persons = people
-		//	};
-		//	return View(viewModel);
-		//}
-
+		// Kişiler Listesi => ADMİN
 		public IActionResult PersonList(bool? isDirector)
 		{
 			var people = _context.Persons.ToList();
@@ -93,6 +84,7 @@ namespace MovieWeb.Controllers
 			}
 		}
 
+		// Yönetmen Listesi
 		public IActionResult DirectorList()
 		{
 			var directorList = _context.Persons.Where(p => p.isDirector == true).ToList();
@@ -103,6 +95,7 @@ namespace MovieWeb.Controllers
 			return View(viewModel);
 		}
 
+		//Oyuncu Listesi
 		public IActionResult CastList()
 		{
 			var castList = _context.Persons.Where(c => c.isDirector == false).ToList();
@@ -111,6 +104,13 @@ namespace MovieWeb.Controllers
 				Casts = castList
 			};
 			return View(viewModel);
+		}
+
+		// Details
+		public IActionResult PersonDetails(int id)
+		{
+			var person = _context.Persons.Find(id);
+			return View(person);
 		}
 
 		[HttpPost]
