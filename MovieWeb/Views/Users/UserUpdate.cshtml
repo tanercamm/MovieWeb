@@ -1,0 +1,67 @@
+﻿@model UserEditViewModel
+
+
+<h1>Edit User</h1>
+<hr />
+
+<form method="post" asp-controller="Users" asp-action="UserUpdate" enctype="multipart/form-data">
+	<div class="row">
+		<div class="col-md-8">
+			<div asp-validation-summary="All"></div> @*tüm validation hatalarını gösterir*@
+			<input type="hidden" name="UserId" value="@Model.UserId" />
+
+			<div class="mb-3">
+				<label asp-for="Name"></label>
+				<input asp-for="Name" class="form-control" value="@Model.Name" />
+				<span asp-validation-for="Name" class="text-danger"></span> @*ilgili validation hatasını gösterir*@
+			</div>
+
+			<div class="mb-3">
+				<label asp-for="Username"></label>
+				<textarea asp-for="Username" class="form-control">@Model.Username</textarea>
+				<span asp-validation-for="Username" class="text-danger"></span>
+			</div>
+
+			<div class="mb-3">
+				<label asp-for="Email"></label>
+				<textarea asp-for="Email" class="form-control">@Model.Email</textarea>
+				<span asp-validation-for="Email" class="text-danger"></span>
+			</div>
+
+			<div class="mb-3">
+				<label asp-for="Password"></label>
+				<textarea asp-for="Password" class="form-control">@Model.Password</textarea>
+				<span asp-validation-for="Password" class="text-danger"></span>
+			</div>
+
+			<div class="mb-3">
+				<label asp-for="ConfirmPassword"></label>
+				<textarea asp-for="ConfirmPassword" class="form-control">@Model.ConfirmPassword</textarea>
+				<span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+			</div>
+
+			<div class="mb-3">
+				<input type="hidden" name="ImageUrl" value="@Model.ImageUrl" />
+				<input type="file" name="file" class="form-control" />
+			</div>
+
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</div>
+		<div class="col-md-4">
+
+			@* <div class="mt-3">
+			<img src="/persons/@Model.ImageUrl" width="300" />
+			</div> *@
+
+			<div class="card" style="width: 18rem;">
+				<img src="/users/@Model.ImageUrl" class="card-img-top">
+				<div class="card-body">
+					<h5 class="card-title">@Model.Name</h5>
+					<a href="/users/userdetails" class="btn btn-primary">Details</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</form>
