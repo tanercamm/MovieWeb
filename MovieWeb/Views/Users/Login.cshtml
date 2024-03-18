@@ -1,0 +1,38 @@
+﻿@model UserLoginViewModel
+
+<div class="row">
+    <div class="col-md-9">
+        <h1>Login</h1>
+        <hr />
+        <form action="Login" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label"></label>
+                <input asp-for="Password" class="form-control">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="ConfirmPassword" class="form-label"></label>
+                <input asp-for="ConfirmPassword" class="form-control">
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-dark">Login</button>
+        </form>
+        <br />
+        <a href="/users/register" class="btn btn-secondary">No have Account!</a>
+    </div>
+	<div class="col-md-3">
+		<div class="card" style="width: 18rem;">
+			<img src="/users/MovieWeb_Logo.jpg" class="card-img-top">
+			<div class="card-body">
+				<h5 class="card-title">🎬 Movie App™️</h5>
+			</div>
+		</div>
+	</div>
+</div>
+

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using MovieWeb.Data;
 
@@ -14,6 +15,10 @@ builder.Services.AddDbContext<MovieContext>(options =>
 	options.UseSqlServer(connectionString);
 });
 
+// authentication için gerekli kod dizisini ekliyoruz. 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => {
+    options.LoginPath = "/Users/Login";
+});
 
 var app = builder.Build();
 
@@ -29,6 +34,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
