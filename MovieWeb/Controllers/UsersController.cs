@@ -119,7 +119,7 @@ namespace MovieWeb.Controllers
                 _context.Users.Add(user);
                 _context.SaveChanges();
 
-                return RedirectToAction("UserList");
+                return RedirectToAction("Login");
             }
 
             return View(model);
