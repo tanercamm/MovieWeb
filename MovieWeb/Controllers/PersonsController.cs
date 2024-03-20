@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MovieWeb.Data;
 using MovieWeb.Entity;
 using MovieWeb.Models;
@@ -84,6 +85,7 @@ namespace MovieWeb.Controllers
 			}
 		}
 
+		
 		// Yönetmen Listesi
 		public IActionResult DirectorList()
 		{
@@ -95,6 +97,7 @@ namespace MovieWeb.Controllers
 			return View(viewModel);
 		}
 
+		
 		//Oyuncu Listesi
 		public IActionResult CastList()
 		{
@@ -106,6 +109,7 @@ namespace MovieWeb.Controllers
 			return View(viewModel);
 		}
 
+		
 		// Details
 		public IActionResult PersonDetails(int id)
 		{

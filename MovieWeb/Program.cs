@@ -1,23 +1,56 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using MovieWeb.Data;
+using MovieWeb.Entity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-
+// Database connection
 builder.Services.AddDbContext<MovieContext>(options =>
 {
-	var config = builder.Configuration;
-	var connectionString = config.GetConnectionString("mssql_connection");
+	//var config = builder.Configuration;
+	//var connectionString = config.GetConnectionString("mssql_connection");
+	//options.UseSqlServer(connectionString);
+	var connectionString = builder.Configuration.GetConnectionString("mssql_connection") + ";MultipleActiveResultSets=True";
 	options.UseSqlServer(connectionString);
+
 });
 
+// Identity ekliyoruz
+builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<MovieContext>().AddDefaultTokenProviders();
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+	options.Password.RequiredLength = 6;
+	options.Password.RequireNonAlphanumeric = false;
+	options.Password.RequireLowercase = false;
+	options.Password.RequireUppercase = false;
+	options.Password.RequireDigit = false;
+
+	// Email sadece bir kiþiye tanýmlý olsun = true;
+	options.User.RequireUniqueEmail = true;
+
+	options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyz";
+
+	options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);  // hatalý giriþte 5 dakika süre cezasý
+	options.Lockout.MaxFailedAccessAttempts = 5;   // girmek için 5 kez hakký bulunur
+
+});
+
+
 // authentication için gerekli kod dizisini ekliyoruz. 
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => {
-    options.LoginPath = "/Users/Login";
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+{
+	options.LoginPath = "/Account/Login";
+	options.AccessDeniedPath = "/Account/AccessDenied"; // <=> yetkisiz eriþim durumunda yolladýðý path yolu
+	options.SlidingExpiration = true;               // eriþim saðlandýðý vakit süresi resetler
+													//options.ExpireTimeSpan = TimeSpan.FromDays(30);
+	options.ExpireTimeSpan = TimeSpan.FromMinutes(1);
 });
 
 var app = builder.Build();
@@ -39,8 +72,15 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
+
 app.MapControllerRoute(
 	name: "default",
 	pattern: "{controller=Home}/{action=Index}/{id?}");
 
+// verileri çalýþmadan önce tanýmlamasý için komutu yazýyoruz
+SeedData.IdentityTestUser(app);
+// build oldu, veriler yüklendi ve þimdi de run edilecek
+
 app.Run();
+
+

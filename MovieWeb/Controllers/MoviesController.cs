@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MovieWeb.Data;
 using MovieWeb.Models;
 
 namespace MovieWeb.Controllers
 {
+	[Authorize]
 	public class MoviesController : Controller
 	{
 		private readonly MovieContext _context;

@@ -18,25 +18,28 @@
 						<a href="/persons/castlist" class="nav-link">Casts</a>
 					</li>
 				}
-				@if (User.Identity!.IsAuthenticated && User.IsInRole("Admin"))
+				@if (User.Identity!.IsAuthenticated && User.IsInRole("admin"))
 				{
 					<li class="nav-item">
-						<a href="/admin/moviecreate" class="nav-link">Admin Create Movie</a>
+						<a href="/admin/moviecreate" class="nav-link">Create Movie</a>
 					</li>
 					<li class="nav-item">
-						<a href="/admin/movielist" class="nav-link">Admin Movies</a>
+						<a href="/admin/movielist" class="nav-link">Panel Movies</a>
 					</li>
 					<li class="nav-item">
-						<a href="/admin/genrelist" class="nav-link">Admin Genres</a>
+						<a href="/admin/genrelist" class="nav-link">Panel Genres</a>
 					</li>
 					<li class="nav-item">
-						<a href="/persons/personcreate" class="nav-link">Person Create</a>
+						<a href="/persons/personcreate" class="nav-link">Create Person</a>
 					</li>
 					<li class="nav-item">
 						<a href="/persons/personlist" class="nav-link">Persons</a>
 					</li>
 					<li class="nav-item">
-						<a href="/users/userlist" class="nav-link">Users</a>
+						<a href="/users/index" class="nav-link">Users</a>
+					</li>
+					<li class="nav-item">
+						<a href="/roles/index" class="nav-link">Roles</a>
 					</li>
 				}
 
@@ -47,20 +50,22 @@
 				{
 
 					<li class="nav-item">
-						<a href="#" class="nav-link">@User.Identity.Name</a>
+						<div class="badge text-bg-danger text-wrap" style="width: 6rem;">
+							@User.Identity.Name
+						</div>
 					</li>
 					<li class="nav-item">
-						<a href="/users/logout" class="nav-link">Logout</a>
+						<a href="/account/logout" class="nav-link">Logout</a>
 					</li>
 
 				}
 				else
 				{
 					<li class="nav-item">
-						<a href="/users/login" class="nav-link">Login</a>
+						<a href="/account/login" class="nav-link">Login</a>
 					</li>
 					<li class="nav-item">
-						<a href="/users/register" class="nav-link">Register</a>
+						<a href="/account/register" class="nav-link">Register</a>
 					</li>
 				}
 			</ul>
